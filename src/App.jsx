@@ -1,11 +1,15 @@
+import { Outlet } from "react-router-dom";
+import Navbar from "./Components/Navbar";
+
 function App() {
   return (
     <>
-      <h1>Netflix GPT</h1>
+      <div>
+        <Navbar />
+        <Outlet />
+      </div>
     </>
   );
 }
 
 export default App;
-
-
