@@ -4,10 +4,17 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../Utils/firebase";
+import { addUser } from "../Utils/userSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const dispatchAction = useDispatch();
   const [isSignUp, setIsSignUp] = useState(false);
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [signUpError, setSignUpError] = useState(null);
@@ -48,6 +55,23 @@ const Login = () => {
           .then((userCredential) => {
             // Signed up
             const user = userCredential.user;
+            updateProfile(auth.currentUser, {
+              displayName: name,
+            })
+              .then(() => {
+                // Update the Redux store with the new user information
+                dispatchAction(
+                  addUser({
+                    uid: user.uid,
+                    displayName: name,
+                    email: user.email,
+                  })
+                );
+                console.log("User added to store");
+              })
+              .catch((error) => {
+                console.log(error);
+              });
             console.log(user);
             formik.resetForm();
             setSignUpError(null);
@@ -147,9 +171,9 @@ const Login = () => {
               className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
             >
               {isShowPassword ? (
-                <FaRegEyeSlash className="h-6 w-6 text-gray-400" />
+                <FaRegEyeSlash className="h-4 w-4 text-gray-400" />
               ) : (
-                <FaEye className="h-6 w-6 text-gray-400" />
+                <FaEye className="h-4 w-4 text-gray-400" />
               )}
             </button>
             {formik.touched.password && formik.errors.password && (
