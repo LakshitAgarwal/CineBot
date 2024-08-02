@@ -2,18 +2,14 @@ import { useSelector } from "react-redux";
 import { NETFLIX_LOGO_URL } from "../Utils/constants";
 import { auth } from "../Utils/firebase";
 import { signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const navigate = useNavigate();
   const isUser = useSelector((store) => store.user);
 
   const handleSignOut = () => {
     // Sign out logic
     signOut(auth)
-      .then(() => {
-        navigate("/");
-      })
+      .then(() => {})
       .catch((error) => {
         console.error(error);
       });
@@ -21,7 +17,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="absolute z-10 bg-gradient-to-b from-black w-screen flex justify-between items-center p-4">
+      <div className="absolute z-20 bg-gradient-to-b from-black w-screen flex justify-between items-center p-4">
         <img src={NETFLIX_LOGO_URL} className="w-44 ml-4" alt="Netflix Logo" />
         {isUser ? (
           <button

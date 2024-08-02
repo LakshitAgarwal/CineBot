@@ -1,12 +1,12 @@
-import { useSelector } from "react-redux";
+import useFecthMovies from "../hooks/useFecthMovies";
+import Hero from "./BrowseComponents/Hero";
 
 const Browse = () => {
-  const user = useSelector((store) => store.user);
+  useFecthMovies();
+
   return (
-    <div className="h-screen w-screen bg-black">
-      <h1 className="text-center pt-36 text-red-600 text-5xl font-bold">
-        {`Welcome ${user.name}!`}
-      </h1>
+    <div className="h-screen bg-black">
+      <Hero />
     </div>
   );
 };
