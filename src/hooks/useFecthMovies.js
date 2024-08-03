@@ -10,7 +10,7 @@ const useFecthMovies = () => {
     const data = await fetch(API_URL, options);
     const jsonData = await data.json();
     dispatch(addMovies(jsonData.results));
-    console.log(jsonData.results);
+    // console.log(jsonData.results);
   }
 
   useEffect(() => {

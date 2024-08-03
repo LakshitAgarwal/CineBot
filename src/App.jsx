@@ -17,7 +17,7 @@ const AuthProvider = ({ children }) => {
         const uid = user.uid;
         const name = user.displayName;
         const email = user.email;
-        dispatchAction(addUser({ uid:uid, name:name, email:email }));
+        dispatchAction(addUser({ uid: uid, name: name, email: email }));
         navigate("/browse");
       } else {
         dispatchAction(removeUser());

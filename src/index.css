@@ -25,7 +25,7 @@
 
 .archivo-black-regular {
   font-family: "Archivo Black", sans-serif;
-  font-weight: 400;
+  font-weight: 300;
   font-style: normal;
 }
 
@@ -34,14 +34,6 @@
   font-optical-sizing: auto;
   font-weight: 900;
   font-style: normal;
-}
-
-.kalnia-glaze-md {
-  font-family: "Kalnia Glaze", serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-  font-variation-settings: "wdth" 100;
 }
 
 .edu-au-vic-wa-nt-hand-md {
@@ -56,4 +48,13 @@
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
+}
+
+.hidding-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hidding-scrollbar::-webkit-scrollbar {
+  display: none;
 }

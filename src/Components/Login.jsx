@@ -12,6 +12,7 @@ import {
 import { auth } from "../Utils/firebase";
 import { addUser } from "../Utils/userSlice";
 import { useDispatch } from "react-redux";
+import Navbar from "./Navbar";
 
 const Login = () => {
   const dispatchAction = useDispatch();
@@ -106,100 +107,105 @@ const Login = () => {
   };
 
   return (
-    <div className="relative h-screen w-full">
-      <img
-        className="absolute h-full w-full object-cover"
-        src={NETFLIX_HERO_BG}
-        alt="BG"
-      />
-      <div className="absolute inset-0 bg-black opacity-50"></div>
-      <div className="relative flex justify-center items-center h-full">
-        <form
-          onSubmit={formik.handleSubmit}
-          className="bg-black bg-opacity-75 p-10 rounded-lg w-96"
-        >
-          <h2 className="text-3xl font-bold text-white mb-6">
-            {!isSignUp ? "Sign In" : "Sign Up"}
-          </h2>
-          {isSignUp && (
+    <>
+      <div className="relative h-screen w-full">
+        <img
+          className="absolute h-full w-full object-cover"
+          src={NETFLIX_HERO_BG}
+          alt="BG"
+        />
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="relative flex justify-center items-center h-full">
+          <form
+            onSubmit={formik.handleSubmit}
+            className="bg-black bg-opacity-75 p-10 rounded-lg w-96"
+          >
+            <h2 className="text-3xl font-bold text-white mb-6">
+              {!isSignUp ? "Sign In" : "Sign Up"}
+            </h2>
+            {isSignUp && (
+              <div className="mb-4">
+                <input
+                  type="text"
+                  placeholder="Name"
+                  name="name"
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  className="bg-gray-800 text-white w-full h-12 p-3 rounded"
+                />
+                {formik.touched.name && formik.errors.name && (
+                  <div className="text-red-500 mt-2 text-sm">
+                    {formik.errors.name}
+                  </div>
+                )}
+              </div>
+            )}
             <div className="mb-4">
               <input
-                type="text"
-                placeholder="Name"
-                name="name"
-                value={formik.values.name}
+                type="email"
+                placeholder="Email Address"
+                name="email"
+                value={formik.values.email}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 className="bg-gray-800 text-white w-full h-12 p-3 rounded"
               />
-              {formik.touched.name && formik.errors.name && (
+              {formik.touched.email && formik.errors.email && (
                 <div className="text-red-500 mt-2 text-sm">
-                  {formik.errors.name}
+                  {formik.errors.email}
                 </div>
               )}
             </div>
-          )}
-          <div className="mb-4">
-            <input
-              type="email"
-              placeholder="Email Address"
-              name="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className="bg-gray-800 text-white w-full h-12 p-3 rounded"
-            />
-            {formik.touched.email && formik.errors.email && (
-              <div className="text-red-500 mt-2 text-sm">
-                {formik.errors.email}
-              </div>
-            )}
-          </div>
-          <div className="mb-4 relative">
-            <input
-              type={isShowPassword ? "text" : "password"}
-              placeholder="Password"
-              name="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              className="bg-gray-800 text-white w-full h-12 p-3 rounded pr-12"
-            />
-            <button
-              type="button"
-              onClick={showPassword}
-              className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
-            >
-              {isShowPassword ? (
-                <FaRegEyeSlash className="h-4 w-4 text-gray-400" />
-              ) : (
-                <FaEye className="h-4 w-4 text-gray-400" />
+            <div className="mb-4 relative">
+              <input
+                type={isShowPassword ? "text" : "password"}
+                placeholder="Password"
+                name="password"
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                className="bg-gray-800 text-white w-full h-12 p-3 rounded pr-12"
+              />
+              <button
+                type="button"
+                onClick={showPassword}
+                className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
+              >
+                {isShowPassword ? (
+                  <FaRegEyeSlash className="h-4 w-4 text-gray-400" />
+                ) : (
+                  <FaEye className="h-4 w-4 text-gray-400" />
+                )}
+              </button>
+              {formik.touched.password && formik.errors.password && (
+                <div className="text-red-500 mt-2 text-sm">
+                  {formik.errors.password}
+                </div>
               )}
+            </div>
+            {signUpError ? (
+              <div className="text-red-500 mt-2 text-sm">{signUpError}</div>
+            ) : null}
+            <button
+              type="submit"
+              className="bg-red-600 text-white w-full h-12 rounded my-2"
+            >
+              {!isSignUp ? "Sign In" : "Sign Up"}
             </button>
-            {formik.touched.password && formik.errors.password && (
-              <div className="text-red-500 mt-2 text-sm">
-                {formik.errors.password}
-              </div>
-            )}
-          </div>
-          {signUpError ? (
-            <div className="text-red-500 mt-2 text-sm">{signUpError}</div>
-          ) : null}
-          <button
-            type="submit"
-            className="bg-red-600 text-white w-full h-12 rounded my-2"
-          >
-            {!isSignUp ? "Sign In" : "Sign Up"}
-          </button>
-          <p className="text-gray-500 mt-8 select-none">
-            {isSignUp ? "Already have an account? " : "New to NetflixGPT? "}
-            <span className="text-white cursor-pointer" onClick={toggleSignUp}>
-              {isSignUp ? "Sign In Now" : "Sign Up Now"}
-            </span>
-          </p>
-        </form>
+            <p className="text-gray-500 mt-8 select-none">
+              {isSignUp ? "Already have an account? " : "New to NetflixGPT? "}
+              <span
+                className="text-white cursor-pointer"
+                onClick={toggleSignUp}
+              >
+                {isSignUp ? "Sign In Now" : "Sign Up Now"}
+              </span>
+            </p>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

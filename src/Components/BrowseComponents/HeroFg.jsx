@@ -1,8 +1,8 @@
 const HeroFg = ({ title, desc }) => {
   return (
-    <div className="pt-[19%] absolute -mt-[5.6rem] text-white bg-gradient-to-tr from-black w-screen aspect-video z-10">
+    <div className="pt-[17%] -mt-12 absolute text-white bg-gradient-to-tr from-black w-screen aspect-video z-10">
       <div>
-        <h1 className="font-bold text-6xl ml-12 w-1/2 leading-normal shadows-into-light-regular">
+        <h1 className="font-bold text-6xl ml-12 w-1/2 shadows-into-light-regular">
           {title}
         </h1>
         <p className="mt-6 w-1/4 ml-12  text-gray-100">{desc}</p>
