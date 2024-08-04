@@ -12,8 +12,8 @@ const MoviesCatalouge = () => {
     <div>
       <NowPlaying movies={store.nowPlayingMovies} />
       <UpcomingMovies upcomingMovies={store.upcomingMovies} />
-      <PopularMovies popularMovies={store.popularMovies} />
       <PopularTVSeries popularTVSeries={store.popularTVSeries} />
+      <PopularMovies popularMovies={store.popularMovies} />
       <OnAirSeries onAir={store.onAirSeries} />
     </div>
   );

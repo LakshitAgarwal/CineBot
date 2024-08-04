@@ -12,7 +12,6 @@ import {
 import { auth } from "../Utils/firebase";
 import { addUser } from "../Utils/userSlice";
 import { useDispatch } from "react-redux";
-import Navbar from "./Navbar";
 
 const Login = () => {
   const dispatchAction = useDispatch();
