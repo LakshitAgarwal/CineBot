@@ -38,7 +38,7 @@ const HeroBg = ({ id }) => {
       {trailerVideo ? (
         <div className="absolute top-0 -mt-12 w-full z-0">
           <iframe
-            className="w-screen aspect-video"
+            className="w-screen aspect-video scale-125"
             src={`https://www.youtube.com/embed/${trailerVideo?.key}?autoplay=1&mute=1&loop=1&controls=0&playlist=${trailerVideo?.key}`}
             title="YouTube video player"
             frameBorder="0"
