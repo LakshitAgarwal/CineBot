@@ -5,7 +5,7 @@ const HeroFg = ({ title, desc }) => {
         <h1 className="font-bold text-6xl ml-12 w-1/2 shadows-into-light-regular">
           {title}
         </h1>
-        <p className="mt-6 w-1/4 ml-12  text-gray-100">{desc}</p>
+        <p className="mt-6 w-[28%] ml-12  text-gray-100">{desc}</p>
       </div>
       <div className="my-6 ml-12 ">
         <button className="bg-white text-black py-3 px-8 rounded-md font-bold text-lg hover:bg-opacity-90 ">
