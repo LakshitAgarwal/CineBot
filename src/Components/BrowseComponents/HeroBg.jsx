@@ -30,7 +30,7 @@ const HeroBg = ({ id }) => {
   };
 
   useEffect(() => {
-    fetchVideo();
+    if (!trailerVideo) fetchVideo();
   }, []);
 
   return (

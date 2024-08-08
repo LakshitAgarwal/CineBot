@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { ON_AIR_TV_SERIES_API_URL, options } from "../Utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addOnAirSeries } from "../Utils/moviesSlice";
 
 const useFecthOnAirSeries = () => {
   const dispatch = useDispatch();
+  const Movies = useSelector((store) => store.movies.onAirSeries);
 
   async function callMovieAPI() {
     const data = await fetch(ON_AIR_TV_SERIES_API_URL, options);
@@ -13,7 +14,7 @@ const useFecthOnAirSeries = () => {
   }
 
   useEffect(() => {
-    callMovieAPI();
+    if (!Movies) callMovieAPI();
   }, []);
 };
 

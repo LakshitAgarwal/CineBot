@@ -1,10 +1,14 @@
 import { useEffect } from "react";
 import { API_URL, options } from "../Utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addMovies } from "../Utils/moviesSlice";
 
 const useFecthMovies = () => {
   const dispatch = useDispatch();
+
+  const nowPlayingMovies = useSelector(
+    (store) => store.movies.nowPlayingMovies
+  );
 
   async function callMovieAPI() {
     const data = await fetch(API_URL, options);
@@ -14,7 +18,7 @@ const useFecthMovies = () => {
   }
 
   useEffect(() => {
-    callMovieAPI();
+    if (!nowPlayingMovies) callMovieAPI();
   }, []);
 };
 
