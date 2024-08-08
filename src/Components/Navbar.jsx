@@ -3,6 +3,7 @@ import { NETFLIX_LOGO_URL } from "../Utils/constants";
 import { auth } from "../Utils/firebase";
 import { signOut } from "firebase/auth";
 import { senseClick } from "../Utils/eventHandlingSlice";
+import { removeRecommendations } from "../Utils/recommendationsSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ const Navbar = () => {
 
   const toggleAiSearch = () => {
     dispatch(senseClick());
+    dispatch(removeRecommendations());
   };
 
   return (

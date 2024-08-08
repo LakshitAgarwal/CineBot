@@ -3,11 +3,17 @@ import { useFormik } from "formik";
 import genAI from "../Utils/geminiConfig";
 import { options } from "../Utils/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addRecommendations } from "../Utils/recommendationsSlice";
+import {
+  addRecommendations,
+  removeRecommendations,
+} from "../Utils/recommendationsSlice";
 import SearchResultMovies from "./BrowseComponents/SearchResultMovies";
 import { ImCross } from "react-icons/im";
+import ShimmerUi from "./ShimmerUi";
+import { useState } from "react";
 
 const AiSearch = () => {
+  const [searchInitiated, setSearchInitiated] = useState(false);
   const dispatch = useDispatch();
   const store = useSelector((store) => store.recommendations.recomendations);
 
@@ -27,6 +33,8 @@ const AiSearch = () => {
       AiSearch: "",
     },
     onSubmit: async (values) => {
+      setSearchInitiated(true);
+      dispatch(removeRecommendations());
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       const query =
         "Act as a movie recommendation system and suggest some movies for the query: " +
@@ -72,14 +80,18 @@ const AiSearch = () => {
           <FaSearch />
         </button>
       </form>
-      <div className="flex flex-wrap mr-12">
-        {store.map((movieList, index) => {
-          const firstMovie = movieList?.results?.[0];
-          return firstMovie ? (
-            <SearchResultMovies key={index} movies={[firstMovie]} />
-          ) : null;
-        })}
-      </div>
+      {searchInitiated && store.length === 0 ? (
+        <ShimmerUi />
+      ) : (
+        <div className="flex flex-wrap mr-12">
+          {store.map((movieList, index) => {
+            const firstMovie = movieList?.results?.[0];
+            return firstMovie ? (
+              <SearchResultMovies key={index} movies={[firstMovie]} />
+            ) : null;
+          })}
+        </div>
+      )}
     </div>
   );
 };

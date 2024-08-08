@@ -58,3 +58,15 @@
 .hidding-scrollbar::-webkit-scrollbar {
   display: none;
 }
+@keyframes shimmer {
+  0% {
+    background-position: -100%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s infinite linear;
+}

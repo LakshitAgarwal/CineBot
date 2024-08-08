@@ -9,8 +9,12 @@ const recomendationsSlice = createSlice({
     addRecommendations: (state, action) => {
       state.recomendations = action.payload;
     },
+    removeRecommendations: (state) => {
+      state.recomendations = [];
+    },
   },
 });
 
-export const { addRecommendations } = recomendationsSlice.actions;
+export const { addRecommendations, removeRecommendations } =
+  recomendationsSlice.actions;
 export default recomendationsSlice.reducer;
