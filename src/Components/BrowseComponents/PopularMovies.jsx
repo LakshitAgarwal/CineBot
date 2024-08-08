@@ -1,7 +1,7 @@
 import MovieCard from "./MovieCard";
 
 const PopularMovies = ({ popularMovies }) => {
-  console.log(popularMovies);
+  // console.log(popularMovies);
   return (
     <div className="my-6">
       <div className="ml-12">

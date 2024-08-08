@@ -2,7 +2,7 @@ import { MOVIE_POSTER_URL } from "../../Utils/constants";
 
 const MovieCard = ({ moviePosterPath }) => {
   return (
-    <div className="w-52 h-60 flex-shrink-0">
+    <div className="w-52 h-70 flex-shrink-0">
       <img
         src={MOVIE_POSTER_URL + moviePosterPath}
         alt="poster"
