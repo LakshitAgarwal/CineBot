@@ -11,7 +11,11 @@ const SearchResultMovies = ({ movies, title }) => {
           ? movies
               .filter((movie) => movie.poster_path)
               .map((movie, index) => (
-                <MovieCard key={index} moviePosterPath={movie.poster_path} />
+                <MovieCard
+                  key={index}
+                  movieData={movie}
+                  moviePosterPath={movie.poster_path}
+                />
               ))
           : null}
       </div>

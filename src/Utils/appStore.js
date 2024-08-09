@@ -3,6 +3,7 @@ import userSlice from "./userSlice";
 import moviesSlice from "./moviesSlice";
 import eventHandlingSlice from "./eventHandlingSlice";
 import recommendationsSlice from "./recommendationsSlice";
+import movieDetailsSlice from "./movieDetailsSlice";
 
 const appStore = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const appStore = configureStore({
     movies: moviesSlice,
     eventHandling: eventHandlingSlice,
     recommendations: recommendationsSlice,
+    movieDetails: movieDetailsSlice,
   },
 });
 
