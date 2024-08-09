@@ -14,6 +14,7 @@ import { addUser } from "../Utils/userSlice";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const dispatchAction = useDispatch();
   const [isSignUp, setIsSignUp] = useState(false);
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -49,51 +50,53 @@ const Login = () => {
     onSubmit: (values) => {
       const { name, email, password } = values;
 
+      setLoading(true);
+
       if (isSignUp) {
         // Sign up logic
         createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
             // Signed up
             const user = userCredential.user;
-            updateProfile(auth.currentUser, {
+            return updateProfile(auth.currentUser, {
               displayName: name,
-            })
-              .then(() => {
-                // Update the Redux store with the new user information
-                dispatchAction(
-                  addUser({
-                    uid: user.uid,
-                    displayName: name,
-                    email: user.email,
-                  })
-                );
-                console.log("User added to store");
+            });
+          })
+          .then(() => {
+            // Update the Redux store with the new user information
+            dispatchAction(
+              addUser({
+                uid: auth.currentUser.uid,
+                displayName: name,
+                email: auth.currentUser.email,
               })
-              .catch((error) => {
-                console.log(error);
-              });
-            console.log(user);
-            formik.resetForm();
+            );
             setSignUpError(null);
+            formik.resetForm();
           })
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             setSignUpError(errorCode + ": " + errorMessage);
+          })
+          .finally(() => {
+            setLoading(false); // Always set loading to false at the end of the async operation
           });
       } else {
         // Sign in logic
         signInWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
             // Signed in
-            const user = userCredential.user;
-            console.log(user);
+            console.log(userCredential.user);
             setSignUpError(null);
           })
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             setSignUpError(errorCode + ": " + errorMessage);
+          })
+          .finally(() => {
+            setLoading(false); // Always set loading to false at the end of the async operation
           });
       }
     },
@@ -189,9 +192,17 @@ const Login = () => {
             <button
               type="submit"
               className="bg-red-600 text-white w-full h-12 rounded my-2"
+              disabled={loading}
             >
-              {!isSignUp ? "Sign In" : "Sign Up"}
+              {isSignUp && loading
+                ? "Signing Up..."
+                : !isSignUp && loading
+                ? "Signing In..."
+                : !isSignUp
+                ? "Sign In"
+                : "Sign Up"}
             </button>
+
             <p className="text-gray-500 mt-8 select-none">
               {isSignUp ? "Already have an account? " : "New to NetflixGPT? "}
               <span
