@@ -6,7 +6,7 @@ const MovieCard = ({ moviePosterPath }) => {
       <img
         src={MOVIE_POSTER_URL + moviePosterPath}
         alt="poster"
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
       />
     </div>
   );

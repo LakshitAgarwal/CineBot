@@ -35,7 +35,7 @@ const Navbar = () => {
               className="text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700 mr-10 transition duration-300"
               onClick={toggleAiSearch}
             >
-              {store ? "Home" : "AI Search"}
+              {store ? "Home" : "AI Recommends"}
             </button>
             <button
               onClick={handleSignOut}
