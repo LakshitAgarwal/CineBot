@@ -62,7 +62,7 @@ const AiSearch = () => {
             type="text"
             name="AiSearch"
             className="w-full p-4 pr-10 rounded-full shadow-lg shadow-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 transition duration-300"
-            placeholder="Best Shah Rukh Khan Movies"
+            placeholder="Latest horror films to watch tonight"
             onChange={formik.handleChange}
             value={formik.values.AiSearch}
           />
