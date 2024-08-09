@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className="absolute z-20 bg-gradient-to-b from-black w-screen flex justify-between items-center p-4">
+      <div className="absolute z-20 bg-gradient-to-b from-black w-full flex justify-between items-center p-4">
         <img src={NETFLIX_LOGO_URL} className="w-44 ml-4" alt="Netflix Logo" />
         {isUser ? (
           <div>
