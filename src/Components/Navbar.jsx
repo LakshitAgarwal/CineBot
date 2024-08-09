@@ -2,13 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { NETFLIX_LOGO_URL } from "../Utils/constants";
 import { auth } from "../Utils/firebase";
 import { signOut } from "firebase/auth";
-import { senseClick } from "../Utils/eventHandlingSlice";
 import { removeRecommendations } from "../Utils/recommendationsSlice";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const store = useSelector((store) => store.eventHandling.mouseclicked);
   const isUser = useSelector((store) => store.user);
 
   const handleSignOut = () => {
@@ -27,7 +25,11 @@ const Navbar = () => {
   return (
     <div>
       <div className="absolute z-20 bg-gradient-to-b from-black w-full flex justify-between items-center p-4">
-        <img src={NETFLIX_LOGO_URL} className="w-44 ml-4" alt="Netflix Logo" />
+        <img
+          src={NETFLIX_LOGO_URL}
+          className={`w-44 md:ml-4 ${!isUser ? "mx-auto md:ml-4" : ""}`}
+          alt="Netflix Logo"
+        />
         {isUser ? (
           <div>
             <Link to="/browse">

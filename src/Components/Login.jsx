@@ -120,7 +120,7 @@ const Login = () => {
         <div className="relative flex justify-center items-center h-full">
           <form
             onSubmit={formik.handleSubmit}
-            className="bg-black bg-opacity-75 p-10 rounded-lg w-96"
+            className="bg-black bg-opacity-75 p-10 rounded-lg md:w-96 w-[90%]"
           >
             <h2 className="text-3xl font-bold text-white mb-6">
               {!isSignUp ? "Sign In" : "Sign Up"}
