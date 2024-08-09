@@ -51,7 +51,7 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
               onClick={closeInfo}
             >
               <div
-                className="w-[90vw] md:w-[70vw] h-[80vh] bg-white p-8 rounded-lg relative overflow-y-auto"
+                className="w-[90vw] md:w-[70vw] bg-white p-8 rounded-lg relative overflow-y-auto"
                 onClick={stopPropagation}
               >
                 <button
@@ -64,17 +64,20 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
                   <img
                     src={MOVIE_POSTER_URL + moviePosterPath}
                     alt="poster"
-                    className="w-full md:w-1/3 h-auto rounded-2xl mb-4 md:mb-0"
+                    className="w-full md:w-[37%] h-auto rounded-2xl mb-4 md:mb-0"
                   />
                   <div className="md:w-2/3 md:ml-8">
-                    <h1 className="text-2xl md:text-3xl font-semibold text-gray-800">
-                      {movieData.title}
+                    <h1 className="dm-sans-md text-2xl md:text-4xl my-2 font-semibold text-gray-800">
+                      {movieData.title || movieData.name}
                     </h1>
                     <p className="text-gray-600 text-sm my-1">
-                      Release Date: {movieData.release_date}
+                      Release Date:{" "}
+                      {movieData.release_date || movieData.first_air_date}
                     </p>
                     <p className="my-4">{movieData.overview}</p>
-                    <p className="my-4">Rating: {Math.round(movieData.vote_average*10)/10}/10</p>
+                    <p className="my-4">
+                      Rating: {Math.round(movieData.vote_average * 10) / 10}/10
+                    </p>
                     <hr />
                     <p className="py-4">
                       Language: {movieData.original_language}
@@ -92,7 +95,6 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
 };
 
 export default MovieCard;
-
 
 /**
  * Problem Recap:
