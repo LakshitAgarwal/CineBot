@@ -70,3 +70,7 @@
 .animate-shimmer {
   animation: shimmer 1.5s infinite linear;
 }
+
+body ::-webkit-scrollbar{
+  display: none;
+}
