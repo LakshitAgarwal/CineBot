@@ -56,14 +56,14 @@ const AiSearch = () => {
 
       <form
         onSubmit={formik.handleSubmit}
-        className="flex justify-center pt-32 relative"
+        className="flex justify-center pt-32 mb-6 md:mb-0 relative w-[90%] mx-auto"
       >
         <div className="relative w-[40rem]">
           <input
             type="text"
             name="AiSearch"
             className="w-full p-4 pr-10 rounded-full shadow-lg shadow-red-600 focus:outline-none focus:ring-2 focus:ring-red-600 transition duration-300"
-            placeholder="Latest horror films to watch tonight"
+            placeholder="Latest horror movies"
             onChange={formik.handleChange}
             value={formik.values.AiSearch}
           />
@@ -84,7 +84,7 @@ const AiSearch = () => {
       {searchInitiated && store.length === 0 ? (
         <ShimmerUi />
       ) : (
-        <div className="flex flex-wrap mr-12">
+        <div className="flex flex-wrap md:mr-12 pb-12">
           {store.map((movieList, index) => {
             const firstMovie = movieList?.results?.[0];
             return firstMovie ? (

@@ -21,7 +21,7 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
 
   return (
     <>
-      <div className="w-52 h-70 flex-shrink-0" onClick={handleInfo}>
+      <div className="md:w-52 md:h-70 w-36 h-42 flex-shrink-0" onClick={handleInfo}>
         {moviePosterPath ? (
           <img
             src={MOVIE_POSTER_URL + moviePosterPath}
@@ -52,7 +52,7 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
               onClick={closeInfo}
             >
               <div
-                className="w-[90vw] md:w-[70vw] bg-white p-8 rounded-lg relative overflow-y-auto"
+                className="w-[85vw] md:w-[70vw] h-[90vh] md:h-auto bg-white p-8 rounded-lg relative overflow-y-auto"
                 onClick={stopPropagation}
               >
                 <button
