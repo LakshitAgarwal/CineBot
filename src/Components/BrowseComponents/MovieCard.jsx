@@ -56,7 +56,7 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
               >
                 <button
                   onClick={closeInfo}
-                  className="absolute top-4 right-4 text-white bg-red-500 rounded-full w-8 h-8 flex items-center justify-center"
+                  className="absolute top-4 right-4 text-white bg-red-600 rounded-full w-8 h-8 flex items-center justify-center"
                 >
                   &times;
                 </button>
