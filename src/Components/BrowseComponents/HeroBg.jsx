@@ -36,7 +36,7 @@ const HeroBg = ({ id }) => {
   return (
     <div className="relative">
       {trailerVideo ? (
-        <div className="absolute top-0 -mt-12 w-screen z-0 overflow-hidden">
+        <div className="absolute top-0 -mt-12 w-screen z-0 overflow-x-hidden">
           <iframe
             className="w-screen aspect-video scale-125 "
             src={`https://www.youtube.com/embed/${trailerVideo?.key}?autoplay=1&mute=1&loop=1&controls=0&playlist=${trailerVideo?.key}`}
