@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MOVIE_POSTER_URL } from "../../Utils/constants";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
+import { FaStar } from "react-icons/fa";
 
 const MovieCard = ({ moviePosterPath, movieData }) => {
   const [infoDiv, setInfoDiv] = useState(null);
@@ -75,8 +76,9 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
                       {movieData.release_date || movieData.first_air_date}
                     </p>
                     <p className="my-4">{movieData.overview}</p>
-                    <p className="my-4">
-                      Rating: {Math.round(movieData.vote_average * 10) / 10}/10
+                    <p className="my-4 flex items-center ">
+                      Rating: <FaStar className="text-yellow-500 ml-2 mr-1" />
+                      {Math.round(movieData.vote_average * 10) / 10}/10
                     </p>
                     <hr />
                     <p className="py-4">

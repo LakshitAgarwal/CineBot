@@ -8,7 +8,7 @@ const MovieList = ({ movies, title }) => {
         {title}
       </p>
       <div className="relative z-10 overflow-x-scroll whitespace-nowrap hidding-scrollbar">
-        <div className="inline-flex space-x-6">
+        <div className="inline-flex flex-row-reverse space-x-6">
           {movies
             ? movies.map((movie, index) => (
                 <MovieCard
