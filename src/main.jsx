@@ -4,6 +4,7 @@ import Login from "./Components/Login.jsx";
 import "./index.css";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import Browse from "./Components/Browse.jsx";
+import AiSearch from "./Components/AiSearch.jsx";
 
 // Creating the router using createHashRouter
 const appRouter = createHashRouter([
@@ -18,6 +19,10 @@ const appRouter = createHashRouter([
       {
         path: "/browse",
         element: <Browse />,
+      },
+      {
+        path: "/search",
+        element: <AiSearch />,
       },
     ],
   },

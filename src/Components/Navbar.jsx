@@ -4,11 +4,11 @@ import { auth } from "../Utils/firebase";
 import { signOut } from "firebase/auth";
 import { senseClick } from "../Utils/eventHandlingSlice";
 import { removeRecommendations } from "../Utils/recommendationsSlice";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const store = useSelector((store) => store.eventHandling.mouseclicked);
-
   const isUser = useSelector((store) => store.user);
 
   const handleSignOut = () => {
@@ -20,8 +20,7 @@ const Navbar = () => {
       });
   };
 
-  const toggleAiSearch = () => {
-    dispatch(senseClick());
+  const handleRecommendations = () => {
     dispatch(removeRecommendations());
   };
 
@@ -31,12 +30,19 @@ const Navbar = () => {
         <img src={NETFLIX_LOGO_URL} className="w-44 ml-4" alt="Netflix Logo" />
         {isUser ? (
           <div>
-            <button
-              className="text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700 mr-10 transition duration-300"
-              onClick={toggleAiSearch}
-            >
-              {store ? "Home" : "AI Recommends"}
-            </button>
+            <Link to="/browse">
+              <button
+                className="text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700 mr-10 transition duration-300"
+                onClick={handleRecommendations}
+              >
+                Home
+              </button>
+            </Link>
+            <Link to="/search">
+              <button className="text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700 mr-10 transition duration-300">
+                AI Recommends
+              </button>
+            </Link>
             <button
               onClick={handleSignOut}
               className="text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700 mr-10 transition duration-300"
