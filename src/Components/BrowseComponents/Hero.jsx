@@ -7,11 +7,11 @@ const Hero = () => {
 
   if (!moviesData) return;
 
-  const heroMovie = moviesData[0];
+  const heroMovie = moviesData[18];
   // console.log(heroMovie);
 
   return (
-    <div>
+    <div className="md:pt-0 pt-[33%]">
       <HeroFg title={heroMovie.original_title} desc={heroMovie.overview} />
       <HeroBg id={heroMovie.id} />
     </div>
