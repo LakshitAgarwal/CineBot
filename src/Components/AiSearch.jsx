@@ -11,6 +11,8 @@ import SearchResultMovies from "./BrowseComponents/SearchResultMovies";
 import { ImCross } from "react-icons/im";
 import ShimmerUi from "./ShimmerUi";
 import { useState } from "react";
+import { IoMdHome } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const AiSearch = () => {
   const [searchInitiated, setSearchInitiated] = useState(false);
@@ -93,6 +95,13 @@ const AiSearch = () => {
           })}
         </div>
       )}
+      <Link to="/browse">
+        <div className="fixed z-50 bottom-4 right-4 md:hidden">
+          <div className="flex items-center justify-center p-3 bg-red-600 rounded-full shadow-lg hover:bg-red-700 transition-all duration-300">
+            <IoMdHome className="text-white text-3xl" />
+          </div>
+        </div>
+      </Link>
     </div>
   );
 };

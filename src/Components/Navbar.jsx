@@ -31,11 +31,15 @@ const Navbar = () => {
   return (
     <div>
       <div className="absolute z-20 bg-gradient-to-b from-black w-full flex justify-between items-center p-4">
-        <img
-          src={NETFLIX_LOGO_URL}
-          className={`w-32 md:w-44 md:ml-4 ${!isUser ? "mx-auto md:ml-4" : ""}`}
-          alt="Netflix Logo"
-        />
+        <Link to="/browse">
+          <img
+            src={NETFLIX_LOGO_URL}
+            className={`w-32 md:w-44 md:ml-4 ${
+              !isUser ? "mx-auto md:ml-4" : ""
+            }`}
+            alt="Netflix Logo"
+          />
+        </Link>
         {isUser && (
           <>
             {/* Mobile Hamburger Menu Icon */}
