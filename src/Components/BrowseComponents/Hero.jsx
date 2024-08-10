@@ -7,7 +7,7 @@ const Hero = () => {
 
   if (!moviesData) return;
 
-  const heroMovie = moviesData[18];
+  const heroMovie = moviesData[0];
   // console.log(heroMovie);
 
   return (
