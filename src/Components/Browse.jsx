@@ -7,8 +7,8 @@ import useFetchUpcomingMovies from "../hooks/useFetchUpcomingMovies";
 import Hero from "./BrowseComponents/Hero";
 import MoviesCatalouge from "./BrowseComponents/MoviesCatalouge";
 import AiSearch from "./AiSearch";
-import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { RiRobot2Fill } from "react-icons/ri";
 
 const Browse = () => {
   const store = useSelector((store) => store.eventHandling.mouseclicked);
@@ -31,7 +31,7 @@ const Browse = () => {
             <Link to="/search">
               <div className="fixed z-50 bottom-4 right-4">
                 <div className="flex items-center justify-center p-3 bg-red-600 rounded-full shadow-lg hover:bg-red-700 transition-all duration-300">
-                  <FaSearch className="text-white text-2xl" />
+                  <RiRobot2Fill className="text-white text-3xl" />
                 </div>
               </div>
             </Link>
