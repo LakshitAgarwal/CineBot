@@ -4,6 +4,8 @@ CineBot is a Netflix-like web application designed to provide users with persona
 
 ## Demo
 
+https://github.com/user-attachments/assets/1e83ee00-7e26-4caa-b194-a16990517d77
+
 ## Deployed Link
 
 https://cinebot.netlify.app/
