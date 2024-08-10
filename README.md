@@ -10,7 +10,7 @@ https://cinebot.netlify.app/
 
 ## Features
 
-- Authentication using Google OAuth on login page
+- Authentication using Google Firebase on login page
 - AI-Based Movie Recommendations
 - Detailed Movie and TV Series Information through tmdb API
 - Option to add your favourite movie to wishlist
