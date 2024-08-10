@@ -3,9 +3,23 @@ import { MOVIE_POSTER_URL } from "../../Utils/constants";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import { FaStar } from "react-icons/fa";
+import { BsBookmarkPlusFill } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { addfav } from "../../Utils/favouriteSlice";
+import { BsFillBookmarkCheckFill } from "react-icons/bs";
 
 const MovieCard = ({ moviePosterPath, movieData }) => {
+  const [Click, setClick] = useState(false);
   const [infoDiv, setInfoDiv] = useState(null);
+
+  const dispatch = useDispatch();
+  const addFavs = () => {
+    dispatch(addfav(movieData));
+  };
+  const handleFavs = () => {
+    setClick(!Click);
+    addFavs();
+  };
 
   const handleInfo = () => {
     setInfoDiv(movieData);
@@ -21,16 +35,25 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
 
   return (
     <>
-      <div className="md:w-52 md:h-70 w-36 h-42 mr-6 flex-shrink-0" onClick={handleInfo}>
+      <div className="md:w-52 md:h-70 w-36 h-42 mr-6 flex-shrink-0">
         {moviePosterPath ? (
-          <img
-            src={MOVIE_POSTER_URL + moviePosterPath}
-            alt="poster"
-            className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
-          />
+          <>
+            <img
+              src={MOVIE_POSTER_URL + moviePosterPath}
+              alt="poster"
+              className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
+              onClick={handleInfo}
+            />
+            <div
+              className="text-white text-4xl absolute top-0 -ml-1 opacity-85 cursor-pointer"
+              onClick={handleFavs}
+            >
+              {Click ? <BsFillBookmarkCheckFill /> : <BsBookmarkPlusFill />}
+            </div>
+          </>
         ) : (
           <div className="w-full h-full bg-gray-300 flex items-center justify-center">
-            <span>No Image Available</span>
+            <span>No Poster Available</span>
           </div>
         )}
       </div>

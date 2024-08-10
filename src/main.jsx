@@ -5,6 +5,7 @@ import "./index.css";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import Browse from "./Components/Browse.jsx";
 import AiSearch from "./Components/AiSearch.jsx";
+import Favourites from "./Components/Favourites.jsx";
 
 // Creating the router using createHashRouter
 const appRouter = createHashRouter([
@@ -23,6 +24,10 @@ const appRouter = createHashRouter([
       {
         path: "/search",
         element: <AiSearch />,
+      },
+      {
+        path: "/favourites",
+        element: <Favourites />,
       },
     ],
   },

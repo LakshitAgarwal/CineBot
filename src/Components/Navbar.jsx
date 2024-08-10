@@ -65,6 +65,11 @@ const Navbar = () => {
                   AI Recommends
                 </button>
               </Link>
+              <Link to="/favourites">
+                <button className="text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700 transition duration-300">
+                  Favourites
+                </button>
+              </Link>
               <button
                 onClick={handleSignOut}
                 className="text-white bg-red-600 px-3 py-1 rounded hover:bg-red-700 transition duration-300"
