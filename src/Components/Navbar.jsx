@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NETFLIX_LOGO_URL } from "../Utils/constants";
 import { auth } from "../Utils/firebase";
 import { signOut } from "firebase/auth";
 import { removeRecommendations } from "../Utils/recommendationsSlice";
@@ -10,6 +9,7 @@ import { IoMdClose } from "react-icons/io";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa";
+import logo from "../Assets/logo.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,11 +33,11 @@ const Navbar = () => {
       <div className="absolute z-20 bg-gradient-to-b from-black w-full flex justify-between items-center p-4">
         <Link to="/browse">
           <img
-            src={NETFLIX_LOGO_URL}
+            src={logo}
             className={`w-32 md:w-44 md:ml-4 ${
               !isUser ? "mx-auto md:ml-4" : ""
             }`}
-            alt="Netflix Logo"
+            alt="CineBot Logo"
           />
         </Link>
         {isUser && (
