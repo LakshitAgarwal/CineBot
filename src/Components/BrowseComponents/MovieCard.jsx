@@ -45,7 +45,7 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
               onClick={handleInfo}
             />
             <div
-              className="text-white text-4xl absolute top-0 -ml-1 opacity-85 cursor-pointer"
+              className="text-white text-3xl md:text-4xl absolute top-0 -ml-1 opacity-85 cursor-pointer"
               onClick={handleFavs}
             >
               {Click ? <BsFillBookmarkCheckFill /> : <BsBookmarkPlusFill />}

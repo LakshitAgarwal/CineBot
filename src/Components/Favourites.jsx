@@ -29,20 +29,20 @@ const Favourites = () => {
   const favMovies = useSelector((store) => store.favourites.favourites);
 
   return (
-    <div className="min-h-screen min-w-screen relative pt-[8%] pb-14 pl-12">
+    <div className="min-h-screen min-w-screen relative pt-[23%] md:pt-[8%] pb-14 ">
       <div className="absolute top-0 left-0 z-[-2] h-full w-full bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-      <h1 className="text-white text-3xl text-center mb-20">Favourites</h1>
+      <h1 className="text-white text-3xl text-center mb-10 md:mb-20">Favourites</h1>
 
       {favMovies.length === 0 ? (
         <div className="text-center text-white text-xl">
           <p>You haven't added any movies to your favourites yet.</p>
         </div>
       ) : (
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 pl-8 md:pl-12">
           {favMovies.map((movie, index) => (
             <div
               key={index}
-              className="md:w-52 md:h-70 w-36 h-42 mr-6 flex-shrink-0 relative"
+              className="md:w-52 md:h-70 w-36 h-42 md:mr-6 mr-3 flex-shrink-0 relative"
             >
               <>
                 <img

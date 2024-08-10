@@ -86,7 +86,7 @@ const AiSearch = () => {
       {searchInitiated && store.length === 0 ? (
         <ShimmerUi />
       ) : (
-        <div className="flex flex-wrap md:mr-12 pb-12">
+        <div className="grid grid-cols-2 md:grid-cols-6 md:mr-12 pb-12 pr-4">
           {store.map((movieList, index) => {
             const firstMovie = movieList?.results?.[0];
             return firstMovie ? (
