@@ -3,7 +3,7 @@ const HeroFg = ({ title, desc }) => {
   return (
     <div className="md:pt-[17%] pt-[25%] overflow-x-hidden -mt-12 absolute text-white bg-gradient-to-tr from-black w-full aspect-video z-10">
       <div>
-        <h1 className="font-bold md:text-6xl text-4xl md:ml-12 ml-6 w-1/2 shadows-into-light-regular">
+        <h1 className="font-bold md:text-6xl text-4xl md:ml-12 ml-6 md:w-1/2 shadows-into-light-regular">
           {title}
         </h1>
         <p className="mt-6 w-[28%] ml-12 hidden md:inline-block text-gray-100">
