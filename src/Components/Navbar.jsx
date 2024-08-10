@@ -108,6 +108,11 @@ const Navbar = () => {
               AI Recommends
             </span>
           </Link>
+          <Link to="/favourites" onClick={() => setIsMenuOpen(false)}>
+            <span className="border-b-2 border-red-600 pb-1  text-white text-xl hover:text-red-600 transition duration-300 cursor-pointer">
+              Favourites
+            </span>
+          </Link>
           <span
             onClick={() => {
               handleSignOut();
