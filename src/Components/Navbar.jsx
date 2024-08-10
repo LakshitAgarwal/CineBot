@@ -7,6 +7,9 @@ import { removeRecommendations } from "../Utils/recommendationsSlice";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
+import { FaXTwitter } from "react-icons/fa6";
+import { FaInstagram } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -105,6 +108,29 @@ const Navbar = () => {
           >
             Sign Out
           </span>
+          <div className="flex justify-around w-[35%] text-3xl">
+            <a
+              href="https://x.com/LakshitAgarwal7 "
+              target="_blank"
+              className="text-white"
+            >
+              <FaXTwitter />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/lakshit-agarwal-6082b9216/ "
+              target="_blank"
+              className=" text-blue-500"
+            >
+              <FaLinkedin />
+            </a>
+            <a
+              href="https://www.instagram.com/lakshit.7811/ "
+              target="_blank"
+              className="text-pink-500"
+            >
+              <FaInstagram />
+            </a>
+          </div>
         </div>
       </div>
     </div>
