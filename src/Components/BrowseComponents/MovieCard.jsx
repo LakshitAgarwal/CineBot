@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { MOVIE_POSTER_URL } from "../../Utils/constants";
+import { useState, useEffect } from "react";
+import { MOVIE_POSTER_URL, options } from "../../Utils/constants";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import { FaStar } from "react-icons/fa";
@@ -11,6 +11,8 @@ import { BsFillBookmarkCheckFill } from "react-icons/bs";
 const MovieCard = ({ moviePosterPath, movieData }) => {
   const [Click, setClick] = useState(false);
   const [infoDiv, setInfoDiv] = useState(null);
+  const [trailer, setTrailer] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
   const addFavs = () => {
@@ -23,7 +25,9 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
 
   const handleInfo = () => {
     setInfoDiv(movieData);
+    fetchVideo();
   };
+  console.log(trailer);
 
   const closeInfo = () => {
     setInfoDiv(null);
@@ -31,6 +35,33 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
 
   const stopPropagation = (e) => {
     e.stopPropagation();
+  };
+
+  /**
+   * Problem (i faced):
+   * what i am doing is when someone clicks on a movie card then the trailerapi must be called at that moment and it should give me trailer details, but what happening is when I click on movie card and prints the result as of now initially it says null, and when I close the card and clicks on it again then it shows the trailer data
+   *
+   *Solution:
+   * Uska solution is ki, get a loading screen or shimmer ui hand have a state variable of loading, set it default false aur api call krne se pehle usko true krdo aur jab api call complete hojaye to false krdo
+   */
+  const fetchVideo = async () => {
+    setIsLoading(true);
+    const data = await fetch(
+      `https://api.themoviedb.org/3/movie/${movieData.id}/videos?language=en-US`,
+      options
+    );
+    const jsonData = await data.json();
+    console.log(jsonData);
+    if (jsonData.success === false) {
+      setIsLoading(false);
+      return;
+    }
+    const onlyTrailers = jsonData.results.filter(
+      (videos) => videos?.type === "Trailer"
+    );
+    const finalTrailer = onlyTrailers[0];
+    setTrailer(finalTrailer);
+    setIsLoading(false);
   };
 
   return (
@@ -85,29 +116,60 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
                   &times;
                 </button>
                 <div className="flex flex-col md:flex-row">
-                  <img
-                    src={MOVIE_POSTER_URL + moviePosterPath}
-                    alt="poster"
-                    className="w-full md:w-[37%] h-auto rounded-2xl mb-4 md:mb-0"
-                  />
+                  <div className="w-full md:w-[37%] h-auto rounded-2xl mb-4 md:mb-0">
+                    {isLoading ? (
+                      <div className="w-full h-72 md:h-[30rem] bg-gray-200 rounded-lg animate-pulse"></div>
+                    ) : (
+                      <img
+                        src={MOVIE_POSTER_URL + moviePosterPath}
+                        alt="poster"
+                        className="w-full h-72 md:h-full rounded-lg object-cover"
+                      />
+                    )}
+                  </div>
                   <div className="md:w-2/3 md:ml-8">
-                    <h1 className="dm-sans-md text-2xl md:text-4xl my-2 font-semibold text-gray-800">
-                      {movieData.title || movieData.name}
-                    </h1>
-                    <p className="text-gray-600 text-sm my-1">
-                      Release Date:{" "}
-                      {movieData.release_date || movieData.first_air_date}
-                    </p>
-                    <p className="my-4">{movieData.overview}</p>
-                    <p className="my-4 flex items-center ">
-                      Rating: <FaStar className="text-yellow-500 ml-2 mr-1" />
-                      {Math.round(movieData.vote_average * 10) / 10}/10
-                    </p>
-                    <hr />
-                    <p className="py-4">
-                      Language: {movieData.original_language}
-                    </p>
-                    <hr />
+                    {isLoading ? (
+                      <>
+                        <div className="h-8 bg-gray-200 rounded w-3/4 mb-4 animate-pulse"></div>
+                        <div className="h-4 bg-gray-200 rounded w-1/2 mb-2 animate-pulse"></div>
+                        <div className="h-24 bg-gray-200 rounded w-full mb-4 animate-pulse"></div>
+                        <div className="h-4 bg-gray-200 rounded w-1/4 mb-2 animate-pulse"></div>
+                        <div className="h-4 bg-gray-200 rounded w-1/2 mb-2 animate-pulse"></div>
+                        <div className="h-4 bg-gray-200 rounded w-full animate-pulse"></div>
+                      </>
+                    ) : (
+                      <>
+                        <h1 className="dm-sans-md text-2xl md:text-4xl my-2 font-semibold text-gray-800">
+                          {movieData.title || movieData.name}
+                        </h1>
+                        <p className="text-gray-600 text-sm my-1">
+                          Release Date:{" "}
+                          {movieData.release_date || movieData.first_air_date}
+                        </p>
+                        <p className="my-4">{movieData.overview}</p>
+                        <p className="my-4 flex items-center ">
+                          Rating:{" "}
+                          <FaStar className="text-yellow-500 ml-2 mr-1" />
+                          {Math.round(movieData.vote_average * 10) / 10}/10
+                        </p>
+                        <hr />
+                        <p className="py-4">
+                          Language: {movieData.original_language}
+                        </p>
+                        <hr />
+                        <div className="mt-8">
+                          {trailer ? (
+                            <a
+                              href={`https://www.youtube.com/watch?v=${trailer.key}`}
+                              target="_blank"
+                              className="bg-red-600 text-white px-4 py-2 rounded-md "
+                            >
+                              Watch Trailer
+                            </a>
+                          ) : null}
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>

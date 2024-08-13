@@ -18,7 +18,7 @@ const HeroBg = ({ id }) => {
     );
     const finalTrailer = onlyTrailers[0];
     /**
-     * ok, so now we can't use the onTrailer thing that we filtered out directly to show the trailer as it is inside this fetchVideo function, i.e. it is not accessible outside this function.
+     * ok, so now we can't use the finalTrailer thing that we filtered out directly to show the trailer as it is inside this fetchVideo function, i.e. it is not accessible outside this function.
      * So, there are 2 ways to handle this
      * 1. We can use the useState hook to set the trailer in the state and then use it in the Hero component
      * 2. We can store this Trailer data in out redux store and then we can access it from there
