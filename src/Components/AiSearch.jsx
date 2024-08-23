@@ -41,7 +41,7 @@ const AiSearch = () => {
       const query =
         "Act as a movie recommendation system and suggest some movies for the query: " +
         values.AiSearch +
-        " only give me names of 5-6 movies, comma separated and no other text other than that";
+        " only give me names of movies, comma separated and no other text other than that";
       const result = await model.generateContent([query]);
       const finalMovies = result?.response?.text().split(",");
       const movieSearchListPromiseArray = finalMovies.map((movie) =>

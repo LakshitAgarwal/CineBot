@@ -154,7 +154,7 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
                         </p>
                         <hr />
                         <p className="py-4">
-                          Language: {movieData.original_language}
+                          Language: {movieData.original_language.toUpperCase()}
                         </p>
                         <hr />
                         <div className="mt-8">

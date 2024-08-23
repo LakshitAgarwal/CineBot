@@ -71,6 +71,24 @@
   animation: shimmer 1.5s infinite linear;
 }
 
-body ::-webkit-scrollbar{
+body ::-webkit-scrollbar {
   display: none;
+}
+
+/* .truncate-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+} */
+
+.line-clamp-5 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+  text-overflow: ellipsis; /* This adds the "..." */
+  
+  /* Fallback for browsers not supporting -webkit-line-clamp */
+  max-height: calc(1.5em * 5); /* Approximate height for 5 lines */
+  line-height: 1.5em; /* Adjust based on your typography */
 }
