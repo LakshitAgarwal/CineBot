@@ -66,7 +66,7 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
 
   return (
     <>
-      <div className="md:w-52 md:h-70 w-36 h-42 mr-6 flex-shrink-0">
+      <div className="md:w-52 md:h-70 w-36 h-42 md:mr-6 flex-shrink-0">
         {moviePosterPath ? (
           <>
             <img
