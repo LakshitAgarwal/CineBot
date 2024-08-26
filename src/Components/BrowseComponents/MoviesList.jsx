@@ -10,7 +10,7 @@ const MovieList = ({ movies, title }) => {
             {title}
           </p>
           <div className="relative z-10 overflow-x-scroll whitespace-nowrap hiding-scrollbar">
-            <div className="inline-flex flex-row-reverse ">
+            <div className="inline-flex flex-row-reverse gap-4 md:gap-0">
               {movies.map((movie, index) => (
                 <MovieCard
                   key={index}

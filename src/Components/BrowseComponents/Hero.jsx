@@ -8,7 +8,6 @@ const Hero = () => {
   if (!moviesData) return;
 
   const heroMovie = moviesData[0];
-  // console.log(heroMovie);
 
   return (
     <div className="md:pt-0 pt-[33%]">
