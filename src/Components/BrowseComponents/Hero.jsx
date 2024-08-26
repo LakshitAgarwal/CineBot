@@ -10,9 +10,9 @@ const Hero = () => {
   const heroMovie = moviesData[0];
 
   return (
-    <div className="md:pt-0 pt-[33%]">
+    <div className="md:pt-0 pt-[20%]">
       <HeroFg title={heroMovie.original_title} desc={heroMovie.overview} />
-      <HeroBg id={heroMovie.id} />
+      <HeroBg id={heroMovie.id}/>
     </div>
   );
 };

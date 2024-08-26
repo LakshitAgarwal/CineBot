@@ -92,3 +92,11 @@ body ::-webkit-scrollbar {
   max-height: calc(1.5em * 5); /* Approximate height for 5 lines */
   line-height: 1.5em; /* Adjust based on your typography */
 }
+
+.slick-prev:before{
+  color: #fcfcfc !important;
+}
+
+.slick-next:before{
+  color: #ffffff !important;
+}

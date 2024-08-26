@@ -1,9 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Slider from "react-slick";
 import { options } from "../../Utils/constants";
 import { addTrailer } from "../../Utils/moviesSlice";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const HeroBg = ({ id }) => {
+  const moviesData = useSelector((store) => store.movies?.popularMovies);
   const dispatch = useDispatch();
   const trailerVideo = useSelector((store) => store.movies?.trailer);
 
@@ -25,6 +29,18 @@ const HeroBg = ({ id }) => {
     if (!trailerVideo) fetchVideo();
   }, [trailerVideo]);
 
+  const settings = {
+    dots: true,
+    fade: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    waitForAnimate: false,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  };
+
   return (
     <div className="relative">
       {trailerVideo ? (
@@ -39,6 +55,23 @@ const HeroBg = ({ id }) => {
           ></iframe>
         </div>
       ) : null}
+
+      {/* Mobile-only carousel */}
+      <div className="block lg:hidden mt-4">
+        {moviesData ? (
+          <Slider {...settings}>
+            {moviesData.map((movie) => (
+              <div key={movie.id} className="flex justify-center">
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  alt={movie.title}
+                  className="rounded-lg w-5/6 mx-auto"
+                />
+              </div>
+            ))}
+          </Slider>
+        ) : null}
+      </div>
     </div>
   );
 };
