@@ -22,11 +22,12 @@ const Favourites = () => {
     e.stopPropagation();
   };
 
-  // Remove by Movie ID instead of Index
+  // Remove movie using its ID
   const handleRemove = (movieId) => {
     dispatch(removeFav(movieId));
   };
 
+  // Retrieve the favourite movies from Redux store
   const favMovies = useSelector((store) => store.favourites.favourites);
 
   return (
@@ -56,7 +57,7 @@ const Favourites = () => {
                 />
                 <div
                   className="text-white text-4xl absolute top-0 -ml-1 opacity-85 cursor-pointer"
-                  onClick={() => handleRemove(movie.id)}
+                  onClick={() => handleRemove(movie.id)} // Remove by movie ID
                 >
                   <BsBookmarkDashFill />
                 </div>
