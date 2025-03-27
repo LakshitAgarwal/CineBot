@@ -1,40 +1,45 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// Load favorites from localStorage
-const loadFavoritesFromStorage = () => {
+const loadFromLocalStorage = () => {
   try {
-    const serializedState = localStorage.getItem("favourites");
-    return serializedState ? JSON.parse(serializedState) : [];
-  } catch (e) {
-    console.error("Could not load favorites from storage", e);
+    const data = localStorage.getItem("favourites");
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error("Error loading favourites from localStorage:", error);
     return [];
   }
 };
 
-// Save favorites to localStorage
-const saveFavoritesToStorage = (favorites) => {
+const saveToLocalStorage = (data) => {
   try {
-    localStorage.setItem("favourites", JSON.stringify(favorites));
-  } catch (e) {
-    console.error("Could not save favorites to storage", e);
+    localStorage.setItem("favourites", JSON.stringify(data));
+  } catch (error) {
+    console.error("Error saving favourites to localStorage:", error);
   }
 };
 
 const favouriteSlice = createSlice({
   name: "favourites",
   initialState: {
-    favourites: loadFavoritesFromStorage(),
+    favourites: loadFromLocalStorage(),
   },
   reducers: {
     addfav: (state, action) => {
-      state.favourites.push(action.payload);
-      saveFavoritesToStorage(state.favourites);
+      // Check if the movie is already in favourites to prevent duplicates
+      const isAlreadyFavorite = state.favourites.some(
+        (movie) => movie.id === action.payload.id
+      );
+
+      if (!isAlreadyFavorite) {
+        state.favourites.push(action.payload);
+        saveToLocalStorage(state.favourites);
+      }
     },
     removeFav: (state, action) => {
       state.favourites = state.favourites.filter(
         (movie) => movie.id !== action.payload
       );
-      saveFavoritesToStorage(state.favourites);
+      saveToLocalStorage(state.favourites);
     },
   },
 });

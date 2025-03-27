@@ -1,33 +1,38 @@
-import { useState, useEffect } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import { MOVIE_POSTER_URL, options } from "../../Utils/constants";
 import { motion } from "framer-motion";
 import { createPortal } from "react-dom";
 import { FaStar } from "react-icons/fa";
 import { BsBookmarkPlusFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { addfav } from "../../Utils/favouriteSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addfav, removeFav } from "../../Utils/favouriteSlice";
 import { BsFillBookmarkCheckFill } from "react-icons/bs";
 
 const MovieCard = ({ moviePosterPath, movieData }) => {
-  const [Click, setClick] = useState(false);
-  const [infoDiv, setInfoDiv] = useState(null);
-  const [trailer, setTrailer] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
   const dispatch = useDispatch();
-  const addFavs = () => {
-    dispatch(addfav(movieData));
-  };
+  const favourites = useSelector((state) => state.favourites.favourites);
+
+  // Check if the movie is already in favourites
+  const isFavorite = favourites.some((movie) => movie.id === movieData.id);
+
+  const [infoDiv, setInfoDiv] = React.useState(null);
+  const [trailer, setTrailer] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const handleFavs = () => {
-    setClick(!Click);
-    addFavs();
+    if (isFavorite) {
+      dispatch(removeFav(movieData.id));
+    } else {
+      dispatch(addfav(movieData));
+      
+    }
   };
 
   const handleInfo = () => {
     setInfoDiv(movieData);
     fetchVideo();
   };
-  console.log(trailer);
 
   const closeInfo = () => {
     setInfoDiv(null);
@@ -37,13 +42,6 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
     e.stopPropagation();
   };
 
-  /**
-   * Problem (i faced):
-   * what i am doing is when someone clicks on a movie card then the trailerapi must be called at that moment and it should give me trailer details, but what happening is when I click on movie card and prints the result as of now initially it says null, and when I close the card and clicks on it again then it shows the trailer data
-   *
-   *Solution:
-   * Uska solution is ki, get a loading screen or shimmer ui hand have a state variable of loading, set it default false aur api call krne se pehle usko true krdo aur jab api call complete hojaye to false krdo
-   */
   const fetchVideo = async () => {
     setIsLoading(true);
     const data = await fetch(
@@ -51,14 +49,16 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
       options
     );
     const jsonData = await data.json();
-    console.log(jsonData);
+
     if (jsonData.success === false) {
       setIsLoading(false);
       return;
     }
+
     const onlyTrailers = jsonData.results.filter(
       (videos) => videos?.type === "Trailer"
     );
+
     const finalTrailer = onlyTrailers[0];
     setTrailer(finalTrailer);
     setIsLoading(false);
@@ -79,7 +79,11 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
               className="text-white text-3xl md:text-4xl absolute top-0 -ml-1 opacity-85 cursor-pointer"
               onClick={handleFavs}
             >
-              {Click ? <BsFillBookmarkCheckFill /> : <BsBookmarkPlusFill />}
+              {isFavorite ? (
+                <BsFillBookmarkCheckFill />
+              ) : (
+                <BsBookmarkPlusFill />
+              )}
             </div>
           </>
         ) : (
@@ -162,6 +166,7 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
                             <a
                               href={`https://www.youtube.com/watch?v=${trailer.key}`}
                               target="_blank"
+                              rel="noopener noreferrer"
                               className="bg-red-600 text-white px-4 py-2 rounded-md "
                             >
                               Watch Trailer
@@ -175,14 +180,27 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
               </div>
             </motion.div>
           </>,
-          document.body // Render the modal at the end of the DOM
+          document.body
         )}
     </>
   );
 };
 
-export default MovieCard;
+MovieCard.propTypes = {
+  moviePosterPath: PropTypes.string,
+  movieData: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string,
+    name: PropTypes.string,
+    release_date: PropTypes.string,
+    first_air_date: PropTypes.string,
+    overview: PropTypes.string,
+    vote_average: PropTypes.number,
+    original_language: PropTypes.string,
+  }).isRequired,
+};
 
+export default MovieCard;
 /**
  * Problem Recap:
 When you clicked on a movie to see its details (the info div), other movie lists were appearing on top of that info div. The info div was supposed to be on top of everything else but was getting overlapped by other movie lists.
