@@ -1,18 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
+
+// Load favorites from localStorage
+const loadFavoritesFromStorage = () => {
+  try {
+    const serializedState = localStorage.getItem("favourites");
+    return serializedState ? JSON.parse(serializedState) : [];
+  } catch (e) {
+    console.error("Could not load favorites from storage", e);
+    return [];
+  }
+};
+
+// Save favorites to localStorage
+const saveFavoritesToStorage = (favorites) => {
+  try {
+    localStorage.setItem("favourites", JSON.stringify(favorites));
+  } catch (e) {
+    console.error("Could not save favorites to storage", e);
+  }
+};
+
 const favouriteSlice = createSlice({
   name: "favourites",
   initialState: {
-    favourites: [],
+    favourites: loadFavoritesFromStorage(),
   },
   reducers: {
     addfav: (state, action) => {
       state.favourites.push(action.payload);
+      saveFavoritesToStorage(state.favourites);
     },
     removeFav: (state, action) => {
       state.favourites = state.favourites.filter(
-        (_, index) => index !== action.payload
-        // action.payload contains the data passed when the action is dispatched. In this case, it will be the index of the movie to remove. That's why we are checking with it.
+        (movie) => movie.id !== action.payload
       );
+      saveFavoritesToStorage(state.favourites);
     },
   },
 });
