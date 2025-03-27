@@ -25,6 +25,7 @@ const MovieCard = ({ moviePosterPath, movieData }) => {
       dispatch(removeFav(movieData.id));
     } else {
       dispatch(addfav(movieData));
+      
     }
   };
 
