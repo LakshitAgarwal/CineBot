@@ -26,4 +26,4 @@ export const POPULAR_TV_SERIES_API_URL =
 export const ON_AIR_TV_SERIES_API_URL =
   "https://api.themoviedb.org/3/tv/on_the_air?include_adult=true&language=en-US&page=1";
 
-export const GEMINI_API_KEY = "AIzaSyAayVzb3BmekjtzL2fgCHyEBh_WQDbHWDg";
+export const GEMINI_API_KEY = "AIzaSyDUD6lLxq7Inu4p5DoiFI5bUwbtaEXxy98";
